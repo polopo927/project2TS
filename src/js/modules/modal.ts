@@ -2,12 +2,21 @@ interface ModalConfig {
 	triggerSelector: string,
 	modalSelector: string,
 	closeSelector: string,
-	closeClickOverlay?: boolean
+	deleteGift?: boolean
 }
 
 //создаём структуру для экспорта в наш файл main.js
 //создаём стрелочную функцию которая будет выполнять функцию
 export const modals = () => {
+	let scroll: number;
+
+	let btnPressed = false;
+	const blockScroll = () => {
+		//блокируем прокрутку страницы когда модалка открыта
+		document.body.style.overflow = 'hidden';
+		//добавляем заменитель скролла чтобы страница не прыгала при открытии модалки
+		document.body.style.marginRight = scroll + 'px';
+	}
 	//отвечает за привязку нашего модального окна к триггеру
 	//triggerSelector (например селектор нашей кнопки по которой будем кликать)
 	//modalSelector говорит о том какое модальное окно мы будем открывать
@@ -16,13 +25,13 @@ export const modals = () => {
 		triggerSelector,
 		modalSelector,
 		closeSelector,
-		closeClickOverlay = true
+		deleteGift = false
 	}: ModalConfig) => {
 		const triggers = document.querySelectorAll(triggerSelector);
-		const modal = document.querySelector(modalSelector) as HTMLElement | null;
-		const close = document.querySelector(closeSelector) as HTMLElement | null;
+		const modal: HTMLElement | null = document.querySelector(modalSelector);
+		const close: HTMLElement | null = document.querySelector(closeSelector);
 		const windows = document.querySelectorAll('[data-modal]');
-		const scroll = calcScroll();
+		scroll = calcScroll();
 		const closeModal = () => {
 			//если modal не равно null то это true, то выполнится
 			if (modal) {
@@ -36,16 +45,20 @@ export const modals = () => {
 			//приводим window к типу Element
 			windows.forEach((window: Element) => {
 				//проверяем чтобы window являлся елементом, так как только у элементов есть свойство style
-				if (window instanceof HTMLElement)
+				if (window instanceof HTMLElement) {
 					//закрываем их
 					window.style.display = 'none'
-				document.body.style.overflow = '';
+					window.classList.add('animated', 'fadeIn')
+					document.body.style.overflow = '';
+				}
 			});
 		}
 		const deleteDivScroll = () => {
 			//убираем заменитель скролла при закрытии модалки
 			document.body.style.marginRight = 0 + 'px';
 		}
+
+
 
 		//делаем перебор элементов так как используем queryselectorall
 		triggers.forEach(trigger => {
@@ -55,16 +68,21 @@ export const modals = () => {
 					event.preventDefault();
 				}
 
+				//если пользователь куда-то нажал, то переменная примет значение true
+				btnPressed = true
+
+				//удаление подарка на странице
+				if (deleteGift) {
+					trigger.remove()
+				}
+
 				closeAllModal();
 
 				//если modal не равно null то это true, то выполнится
 				if (modal) {
 					//показываем модальное окно
 					modal.style.display = 'block';
-					//блокируем прокрутку страницы когда модалка открыта
-					document.body.style.overflow = 'hidden';
-					//добавляем заменитель скролла чтобы страница не прыгала при открытии модалки
-					document.body.style.marginRight = scroll + 'px';
+					blockScroll();
 					//если в css присутствуют классы для показf и скрытия, можно использовать их
 					//document.body.classList.add('modal-open')
 				}
@@ -88,7 +106,7 @@ export const modals = () => {
 		if (modal) {
 			//делаем функцию закрытия модалки при нажатии на область которая к ней не относится
 			modal.addEventListener('click', (event) => {
-				if (event.target === modal && closeClickOverlay) {
+				if (event.target === modal) {
 					closeModal();
 					closeAllModal();
 					deleteDivScroll();
@@ -122,8 +140,7 @@ export const modals = () => {
 				const modalToDisplay = document.querySelector<HTMLElement>(selector)
 				if (modalToDisplay) {
 					modalToDisplay.style.display = 'block';
-					//блокируем прокрутку страницы когда модалка открыта
-					document.body.style.overflow = 'hidden';
+					blockScroll();
 				}
 			}
 		}, time);
@@ -154,16 +171,35 @@ export const modals = () => {
 		return scrollWidth;
 	}
 
+	const openBySkroll = (selector: string) => {
+		window.addEventListener('scroll', () => {
+			// оптимизация под старые браузеры
+			//let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)
+			if (!btnPressed && (window.scrollY + document.documentElement.clientHeight >= document.documentElement.scrollHeight /* (scrollHeight) */)) {
+				const handPressedModal: HTMLElement | null = document.querySelector(selector)
+				if (handPressedModal) {
+					handPressedModal.click();
+				}
+			}
+		})
+	}
+
 	bindModal({
 		triggerSelector: '.button-design',
 		modalSelector: '.popup-design',
-		closeSelector: '.popup-design .popup-close',
+		closeSelector: '.popup-design .popup-close'
 	});
 	bindModal({
 		triggerSelector: '.button-consultation',
 		modalSelector: '.popup-consultation',
-		closeSelector: '.popup-consultation .popup-close',
+		closeSelector: '.popup-consultation .popup-close'
 	});
-
-	showModalByTime('.popup-consultation', 5000);
+	bindModal({
+		triggerSelector: '.fixed-gift',
+		modalSelector: '.popup-gift',
+		closeSelector: '.popup-gift .popup-close',
+		deleteGift: true
+	});
+	openBySkroll('.fixed-gift');
+	showModalByTime('.popup-consultation', 50000);
 };
