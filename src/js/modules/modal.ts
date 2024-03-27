@@ -28,8 +28,8 @@ export const modals = () => {
 		deleteGift = false
 	}: ModalConfig) => {
 		const triggers = document.querySelectorAll(triggerSelector);
-		const modal = document.querySelector(modalSelector) as HTMLElement | null;
-		const close = document.querySelector(closeSelector) as HTMLElement | null;
+		const modal: HTMLElement | null = document.querySelector(modalSelector);
+		const close: HTMLElement | null = document.querySelector(closeSelector);
 		const windows = document.querySelectorAll('[data-modal]');
 		scroll = calcScroll();
 		const closeModal = () => {
@@ -176,7 +176,7 @@ export const modals = () => {
 			// оптимизация под старые браузеры
 			//let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)
 			if (!btnPressed && (window.scrollY + document.documentElement.clientHeight >= document.documentElement.scrollHeight /* (scrollHeight) */)) {
-				const handPressedModal = document.querySelector(selector) as HTMLElement | null
+				const handPressedModal: HTMLElement | null = document.querySelector(selector)
 				if (handPressedModal) {
 					handPressedModal.click();
 				}
