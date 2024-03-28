@@ -137,7 +137,7 @@ export const modals = () => {
 			//если у нас не одно модальное окно не открыто, то показываем модальное окно которое нам нужно
 			if (!display) {
 				//создаём проверку на модалку, чтобы она не являлась null
-				const modalToDisplay = document.querySelector<HTMLElement>(selector)
+				const modalToDisplay: HTMLElement | null = document.querySelector(selector)
 				if (modalToDisplay) {
 					modalToDisplay.style.display = 'block';
 					blockScroll();
@@ -171,6 +171,7 @@ export const modals = () => {
 		return scrollWidth;
 	}
 
+	//создаём функцию которая будет открывать модалку по достижению пользователем конца скролла
 	const openBySkroll = (selector: string) => {
 		window.addEventListener('scroll', () => {
 			// оптимизация под старые браузеры
