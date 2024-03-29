@@ -49,27 +49,33 @@ export const sliders = ({
 		}
 	}
 
-	try {
-		const prevBtn = document.querySelector(prev)
-		const nextBtn = document.querySelector(next)
+	const prevBtn = document.querySelector(prev)
+	const nextBtn = document.querySelector(next)
 
-		//вешаем обработчик событий клика предыдущий слайд
-		prevBtn?.addEventListener('click', () => {
-			changeSlides(-1)
-			if (slideIndex) {
+	//вешаем обработчик событий клика предыдущий слайд
+	prevBtn?.addEventListener('click', () => {
+		changeSlides(-1)
+		if (slideIndex) {
+			if (direction === 'horizontal') {
 				items[slideIndex - 1].classList.remove('slideInLeft')
 				items[slideIndex - 1].classList.add('slideInRight')
+			} else {
+				items[slideIndex - 1].classList.add('slideInDown')
 			}
-		})
-		//вешаем обработчик событий клика следующий слайд
-		nextBtn?.addEventListener('click', () => {
-			changeSlides(1)
-			if (slideIndex) {
-				items[slideIndex - 1].classList.remove('slideInRight')
-				items[slideIndex - 1].classList.add('slideInLeft')
+		}
+	})
+	//вешаем обработчик событий клика следующий слайд
+	nextBtn?.addEventListener('click', () => {
+		changeSlides(1)
+		if (slideIndex) {
+			if (direction === 'horizontal') {
+				items[slideIndex - 1].classList.remove('slideInLeft')
+				items[slideIndex - 1].classList.add('slideInRight')
+			} else {
+				items[slideIndex - 1].classList.add('slideInDown')
 			}
-		})
-	} catch (error) { }
+		}
+	})
 
 	let paused: number | undefined
 
