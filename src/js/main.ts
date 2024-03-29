@@ -1,4 +1,4 @@
-import {modals, sliders} from './modules/'
+import {modals, sliders, formsFeedback} from './modules/'
 window.addEventListener('DOMContentLoaded', () => {
 	modals();
 	sliders({
@@ -13,4 +13,5 @@ window.addEventListener('DOMContentLoaded', () => {
 		prev: '.main-prev-btn',
 		next: '.main-next-btn'
 	});
+	formsFeedback();
 })
