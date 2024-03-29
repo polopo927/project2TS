@@ -36,12 +36,11 @@ export const formsFeedback = () => {
 	inputsUpload.forEach(input => {
 		input.addEventListener('input', () => {
 			if (input.files) {
-				let dots;
-				const arrName = input.files[0].name.split('.')
-				arrName[0].length > 9 ? dots = '...' : dots = '.'
-				const name = arrName[0].substring(0, 6) + dots + arrName[1]
+				const [name, ext] = input.files[0].name.split('.')
+				const dots = name.length > 9 ? '...' : '.'
+				const fullName = name.substring(0, 6) + dots + ext
 				if (input.previousElementSibling) {
-					input.previousElementSibling.textContent = name
+					input.previousElementSibling.textContent = fullName
 				}
 			}
 		})
@@ -50,8 +49,6 @@ export const formsFeedback = () => {
 	forms.forEach(form => {
 		form.addEventListener('submit', event => {
 			event.preventDefault()
-
-			const urlServer = 'https://simple-server-2ow5.onrender.com/api/data'
 
 			const statusMessage = document.createElement('div')
 			statusMessage.classList.add('status')
@@ -86,7 +83,8 @@ export const formsFeedback = () => {
 			const jsonData = JSON.stringify(jsonObject);
 			console.log(jsonData)
 
-			postData(urlServer, jsonData)
+			const url = 'https://simple-server-2ow5.onrender.com/api/data'
+			postData(url, jsonData)
 
 				.then(() => {
 					statusImg.setAttribute('src', messageFromSend.ok)
