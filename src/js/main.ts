@@ -1,4 +1,4 @@
-import { modals, sliders, formsFeedback, mask, checkNameInputs, checkEmailInputs } from './modules/'
+import { modals, sliders, formsFeedback, mask, checkNameInputs, checkEmailInputs, showMoreStyles } from './modules/'
 window.addEventListener('DOMContentLoaded', () => {
 	modals();
 	sliders({
@@ -17,4 +17,5 @@ window.addEventListener('DOMContentLoaded', () => {
 	mask('[name="phone"]');
 	checkNameInputs('[name="name"]');
 	checkEmailInputs('[name="email"]');
+	showMoreStyles('.button-styles', '.styles-2')
 })
