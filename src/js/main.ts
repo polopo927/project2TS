@@ -1,4 +1,4 @@
-import { modals, sliders, formsFeedback, mask, checkTextInputs } from './modules/'
+import { modals, sliders, formsFeedback, mask, checkNameInputs, checkEmailInputs } from './modules/'
 window.addEventListener('DOMContentLoaded', () => {
 	modals();
 	sliders({
@@ -15,5 +15,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 	formsFeedback();
 	mask('[name="phone"]');
-	checkTextInputs('[name="name"]');
+	checkNameInputs('[name="name"]');
+	checkEmailInputs('[name="email"]');
 })
