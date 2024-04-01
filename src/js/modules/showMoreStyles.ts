@@ -29,7 +29,7 @@ export const showMoreStyles = (trigger: string, wrapper: string) => {
 	}
 	btn?.addEventListener('click', () => {
 		getResource('db.json')
-			.then(result => createCards(result.style))
+			.then(result => createCards(result.styles))
 			.catch(error => console.log(error))
 
 			btn.remove()
