@@ -14,9 +14,9 @@ export const formsFeedback = () => {
 		loading: 'Загрузка...',
 		success: 'Спасибо! Скоро с Вами свяжемся!',
 		failure: 'что-то пошло не так...',
-		spinner: '/src/assets/img/spinner.gif',
-		ok: '/src/assets/img/ok.png',
-		fail: '/src/assets/img/fail.png'
+		spinner: 'spinner.gif',
+		ok: 'ok.png',
+		fail: 'fail.png'
 	}
 
 	//функция очистки инпутов 
