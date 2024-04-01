@@ -17,5 +17,5 @@ window.addEventListener('DOMContentLoaded', () => {
 	mask('[name="phone"]');
 	checkNameInputs('[name="name"]');
 	checkEmailInputs('[name="email"]');
-	showMoreStyles('.button-styles', '.styles-2')
+	showMoreStyles('.button-styles', '#styles .row')
 })
