@@ -1,4 +1,5 @@
 
+import { postData } from "../services/request"
 //функция отправки форм
 export const formsFeedback = () => {
 	//получаем все формы на странице
@@ -7,24 +8,15 @@ export const formsFeedback = () => {
 	const inputs = document.querySelectorAll('input')
 	//получаем поля ввода с name upload
 	const inputsUpload = document.querySelectorAll<HTMLInputElement>('[name="upload"]')
+	const textAreas = document.querySelectorAll('textarea')
 
 	const messageFromSend = {
 		loading: 'Загрузка...',
 		success: 'Спасибо! Скоро с Вами свяжемся!',
 		failure: 'что-то пошло не так...',
-		spinner: '/src/assets/img/spinner.gif',
-		ok: '/src/assets/img/ok.png',
-		fail: '/src/assets/img/fail.png'
-	}
-
-	//создаём асинхронную функцию отправки данных пользователем
-	const postData = async (url: string, data: string) => {
-		const result = await fetch(url, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: data
-		})
-		return await result.text()
+		spinner: 'spinner.gif',
+		ok: 'ok.png',
+		fail: 'fail.png'
 	}
 
 	//функция очистки инпутов 
@@ -36,6 +28,9 @@ export const formsFeedback = () => {
 			if (input.previousElementSibling) {
 				input.previousElementSibling.textContent = 'Файл не выбран'
 			}
+		})
+		textAreas.forEach(textarea => {
+			textarea.value = ''
 		})
 	}
 

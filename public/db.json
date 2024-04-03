@@ -1,0 +1,24 @@
+{
+    "styles": [
+        {
+            "src": "styles-5.jpg",
+            "title": "Пастелью",
+            "link": "#pastel"
+        },
+        {
+            "src": "styles-6.jpg",
+            "title": "Поп-арт",
+            "link": "#popart"
+        },
+        {
+            "src": "styles-7.png",
+            "title": "Фотомозаика",
+            "link": "#mozaika"
+        },
+        {
+            "src": "styles-8.jpg",
+            "title": "Шарж",
+            "link": "#sharj"
+        }
+    ]
+}
