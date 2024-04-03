@@ -28,7 +28,7 @@ export const calc = ({
 
 			if ((sizeBlock.value == '') || (materialBlock.value == '')) {
 				return resultBlock.textContent = 'Пожалуйста, выберите размер и материал картины'
-			} else if (promocodeBlock.value === 'IWANTPOPART') {
+			} else if (promocodeBlock.value.toLocaleLowerCase() === 'iwantpopart') {
 				resultBlock.textContent = Math.round(sum * 0.7).toString()
 			} else {
 				resultBlock.textContent = sum.toString()
@@ -36,8 +36,7 @@ export const calc = ({
 		}
 	}
 
-	sizeBlock?.addEventListener('change', calcFunc)
-	materialBlock?.addEventListener('change', calcFunc)
-	optionsBlock?.addEventListener('change', calcFunc)
+
+	[sizeBlock, materialBlock, optionsBlock].forEach(block => block?.addEventListener('change', calcFunc))
 	promocodeBlock?.addEventListener('input', calcFunc)
 }
