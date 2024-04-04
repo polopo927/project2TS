@@ -1,4 +1,4 @@
-import { modals, sliders, formsFeedback, mask, checkNameInputs, checkEmailInputs, showMoreStyles, calc, imgSize } from './modules/'
+import { modals, sliders, formsFeedback, mask, checkNameInputs, checkEmailInputs, showMoreStyles, calc, filter, imgSize } from './modules/'
 window.addEventListener('DOMContentLoaded', () => {
 	modals();
 	sliders({
@@ -26,4 +26,5 @@ window.addEventListener('DOMContentLoaded', () => {
 	result:'.calc-price'
 	})
 	imgSize('.sizes-block')
+	filter()
 })
