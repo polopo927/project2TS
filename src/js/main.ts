@@ -1,4 +1,4 @@
-import { modals, sliders, formsFeedback, mask, checkNameInputs, checkEmailInputs, showMoreStyles, calc, filter, imgSize, accordion } from './modules/'
+import { modals, sliders, formsFeedback, mask, checkNameInputs, checkEmailInputs, showMoreStyles, calc, filter, imgSize, accordion, burger } from './modules/'
 window.addEventListener('DOMContentLoaded', () => {
 	modals();
 	sliders({
@@ -28,4 +28,5 @@ window.addEventListener('DOMContentLoaded', () => {
 	imgSize('.sizes-block')
 	filter()
 	accordion('.accordion-heading'/* , '.accordion-block' */)
+	burger('.burger', '.burger-menu')
 })
