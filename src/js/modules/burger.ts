@@ -10,8 +10,10 @@ export const burger = (burgerSelector: string, menuSelector: string) => {
 
 	hideBurger()
 
+	const mobileBurgerSize = 993
+
 	burgerElement?.addEventListener('click', () => {
-		if (menuElement?.style.display == 'none' && window.screen.availWidth < 993) {
+		if (menuElement?.style.display == 'none' && window.screen.availWidth < mobileBurgerSize) {
 			menuElement.style.display = 'block'
 		} else {
 			hideBurger()
@@ -19,7 +21,7 @@ export const burger = (burgerSelector: string, menuSelector: string) => {
 	})
 
 	window.addEventListener('resize', () => {
-		if (window.screen.availWidth > 992) {
+		if (window.screen.availWidth > mobileBurgerSize) {
 			hideBurger()
 		}
 	})
