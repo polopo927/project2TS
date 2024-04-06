@@ -18,44 +18,64 @@ export const scrolling = (upSelector: string) => {
 			hideUp()
 		}
 	})
-	//scrolling with request animation frame
-	let links = document.querySelectorAll<HTMLAnchorElement>('[href^="#"]')
-	let speed = 0.2
+
+	// scrolling with scrollIntoView
+	const links = document.querySelectorAll<HTMLAnchorElement>('[href^="#"]')
 
 	links.forEach(link => {
-		link.addEventListener('click', (event) => {
+		link.addEventListener('click', event => {
 			event.preventDefault()
-
-			const widthTop = document.documentElement.scrollTop
-			const hash = link.hash
-			const toBlock = document.querySelector(hash)?.getBoundingClientRect().top
-			let start: number | null = null
-
-			const step = (time: number) => {
-				if (start === null) {
-					start = time
-				}
-
-				const progress = time - start
-				let pixel: number = widthTop
-				if (toBlock !== undefined) {
-					pixel = (toBlock < 0
-						? Math.max(widthTop - progress / speed, widthTop + toBlock)
-						: Math.min(widthTop + progress / speed, widthTop + toBlock))
-				}
-
-				document.documentElement.scrollTo(0, pixel)
-
-				if (toBlock !== undefined && pixel !== widthTop + toBlock) {
-					requestAnimationFrame(step)
-				} else {
-					location.hash = hash
+			const hash = link.getAttribute('href')
+			if (hash) {
+				const toBlock = document.querySelector(hash)
+				if (toBlock) {
+					toBlock.scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					})
 				}
 			}
-			requestAnimationFrame(step)
 		})
 	})
 }
+//scrolling with request animation frame
+/* let links = document.querySelectorAll<HTMLAnchorElement>('[href^="#"]')
+let speed = 0.2
+
+links.forEach(link => {
+	link.addEventListener('click', (event) => {
+		event.preventDefault()
+
+		const widthTop = document.documentElement.scrollTop
+		const hash = link.hash
+		const toBlock = document.querySelector(hash)?.getBoundingClientRect().top
+		let start: number | null = null
+
+		const step = (time: number) => {
+			if (start === null) {
+				start = time
+			}
+
+			const progress = time - start
+			let pixel: number = widthTop
+			if (toBlock !== undefined) {
+				pixel = (toBlock < 0
+					? Math.max(widthTop - progress / speed, widthTop + toBlock)
+					: Math.min(widthTop + progress / speed, widthTop + toBlock))
+			}
+
+			document.documentElement.scrollTo(0, pixel)
+
+			if (toBlock !== undefined && pixel !== widthTop + toBlock) {
+				requestAnimationFrame(step)
+			} else {
+				location.hash = hash
+			}
+		}
+		requestAnimationFrame(step)
+	})
+})
+} */
 /* 	const element = document.documentElement;
 	const body = document.body;
 
