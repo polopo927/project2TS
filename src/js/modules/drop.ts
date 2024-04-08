@@ -21,17 +21,17 @@ export const drop = () => {
 	}
 
 	const unHighLight = (item: HTMLElement) => {
-		let color = item.style.backgroundColor
+		let colorInput = item.style.backgroundColor
 		const fileUpload = item.closest('.file_upload')
 
 		if (fileUpload instanceof HTMLElement) {
 			fileUpload.style.border = 'none'
 			if (item.closest('.calc_form')) {
-				color = '#fff'
+				colorInput = '#fff'
 			} else if (item.classList.contains('header_upload-img')) {
-				color = '#f7e7e6'
+				colorInput = '#f7e7e6'
 			} else {
-				color = '#ededed'
+				colorInput = '#ededed'
 			}
 		}
 	}
