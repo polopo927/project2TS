@@ -33,7 +33,7 @@ export const drop = () => {
 			} else {
 				ColorBackground = '#ededed'
 			}
-			fileUpload.style.backgroundColor = ColorBackground
+			item.style.backgroundColor = ColorBackground
 		}
 	}
 
