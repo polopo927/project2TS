@@ -28,8 +28,8 @@ export const drop = () => {
 			fileUpload.style.border = 'none'
 			if (item.closest('.calc_form')) {
 				color = '#fff'
-			} else if (item.classList.contains('test1')) {
-				color = 'f7e7e6'
+			} else if (item.classList.contains('header_upload-img')) {
+				color = '#f7e7e6'
 			} else {
 				color = '#ededed'
 			}
